@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="angular.min.js"></script>
+	<script src="gameLogic.js"></script>
+	<title> DB-Risk: The Game of Global Database Placement </title>
+</head>
+
+<body>
+
+
+  <div ng-app="myApp" ng-controller="myCtrl">
+
+    <div style=" float: left; width: 20%; ">
+      Test
+    </div>
+
+    <div style="float: left; width: 80%;  position: relative; left: 0; top: 0;">
+      <!-- World Map -->
+      <img src="img/map.png" alt="worldmap" style="height: 100%; width: 100%; position: relative; left: 0; top: 0;">
+      <div ng-repeat="pos in dcPos" style="position: absolute; left: {{pos.left}}; top: {{pos.top}};">
+        <img src="img/storage.png" alt="storage"> 
+        <br/>
+        <label for="player"><font color="red">Player:</font></label>
+        <select name="player" id="player" ng-model="pos.player" >
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+    </div>
+    </br>
+    <div style=" float: left; width: 100%;" name="rttTable">
+      <center>
+        <table>
+          <tr>
+            <td></td>
+            <td ng-repeat="pos in dcPos">
+              <b>{{pos.name}}</b>
+            </td>
+          </tr>
+          <tr ng-repeat="pos in dcPos">
+            <td><b>{{pos.name}}</b></td>
+            <td ng-repeat="pos1 in dcPos">
+              {{rtt[pos.id][pos1.id]}}
+            </td>
+          </tr>
+        </table>
+      </center>
+    </div>
+
+    
+  </div>
+
+
+</body>
+</html>

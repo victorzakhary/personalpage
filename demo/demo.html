@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="angular.min.js"></script>
+	<script src="gameLogic.js"></script>
+  <script src = "jquery.min.js"></script>
+  <link href = "bootstrap.min.css" rel = "stylesheet">
+	<title> DB-Risk: The Game of Global Database Placement </title>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-80181027-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+
+
+  <div ng-app="myApp" ng-controller="myCtrl">
+    <div style=" float: left; width: 20%;">
+      <button type = "button" style="width:80%;" class = "btn btn-primary" ng-click="loadConfig()">Load Configuration</button> </br>
+    </div>
+    
+    </br></br></br></br>
+    <div id="control" style=" float: left; width: 20%; display:none;" >
+          <label >Please choose </label> <input type="text" ng-model="repCount" ng-change="resetConfiguration()" style="width:10%;"> <label> replicas</label> </br>
+          <label >You chose <font color="red">{{chosenCount}}</font> </label> <label> replicas </label></br>
+          <label >You need <font color="red">{{repCount-chosenCount}}</font> </label> <label> more replicas </label></br>
+
+          <button type = "button" style="width:80%;" class = "btn btn-primary" ng-click="calculateLatency()" ng-disabled="repCount - chosenCount != 0">Calculate Latency</button> </br>
+          <div  id="results">
+            <h4> Avg Read Latency: <span class="label label-default" >{{avgReadLatency}}</span> / <span class="label label-default" >{{optimal[configuration].read}}</span></h4>
+            <h4> Avg Commit Latency: <span class="label label-default" >{{avgCommitLatency}}</span> / <span class="label label-default" >{{optimal[configuration].commit}}</span></h4> </br>
+          </div>
+          <div ng-show="repCount - chosenCount == 0" style="width: 32%; float: left;">
+            <input  type="checkbox"  ng-disabled="repCount - chosenCount != 0" ng-model="optimisticRead" ng-click="calculateLatency()"> </br>
+            <img style="width:100%;"src="img/optimisticread.png" alt="Optimitic Read" >
+          </div>
+          <div ng-show="repCount - chosenCount == 0" style="width: 32%; float: left;">
+            <input  type="checkbox" ng-disabled="repCount - chosenCount != 0" ng-model="handoff" ng-click="calculateLatency()"> </br>
+            <img style="width:100%;" src="img/requesthandoff.png" alt="Request Handoff" > </br>
+            <div ng-repeat="hf in handoffList">
+                <b>{{hf}} </b></br>
+             </div>
+          </div>
+          <div ng-show="repCount - chosenCount == 0" style="width: 32%; float: left;">
+            <input type="checkbox" ng-disabled="repCount - chosenCount != 0" ng-model="passiveReplica" ng-click="calculateLatency()"> </br>
+             <img style="width:100%;" src="img/passivereplica.png" alt="Passive Replica" > </br>
+             <div ng-repeat="pos in dcPos | filter : {isActive:false}">
+                <input style="float:left" type="checkbox" ng-model="pos.selected" ng-click="calculateLatency()"> <font color="red" style="float:left"><b>{{pos.name}} </b></font> </br>
+             </div>
+          </div>
+          <button type = "button" style="width:80%;" class = "btn btn-primary" ng-click="loadOptimal()">Show Optimal</button> </br>
+    </div>
+
+    <div id="map" style="float: left; width: 80%;  position: relative; left: 0; top: 0; display:none;">
+      <!-- World Map -->
+      <img src="img/map.png" alt="worldmap" style="height: 100%; width: 100%; position: relative; left: 0; top: 0;">
+      <div ng-repeat="pos in dcPos track by $index" style="position: absolute; left: {{pos.left}}; top: {{pos.top}};">
+        <img src="img/storage.png" alt="storage" ng-style="pos.style"> 
+        <img ng-repeat="i in getNumber(pos.clientCount) track by $index" src="img/client.jpg" alt="client">
+        <br/>
+       <font style="float:right;background-color:white"><b>{{pos.name}}</b></font><input style="float:right" type="checkbox" ng-model="pos.selected" ng-disabled="pos.disabled" ng-click="change($index)"> </br>
+      <div style="position:absolute; top:5%; left:2%; font-size:12px;" ng-show="repCount - chosenCount == 0"><b><font>R: {{pos.readLatency}}</font></b> </br>
+      <b><font>C: {{pos.commitLatency}}</font></b></div>
+      </div>
+    </div>
+    </br>
+    <div id="rttTable" style=" float: left; width: 100%; display:none;" name="rttTable" class="table-responsive">
+      <center>
+        <table class="table">
+          <tr>
+            <td></td>
+            <td ng-repeat="pos in dcPos">
+              <b>{{pos.name}}</b>
+            </td>
+          </tr>
+          <tr ng-repeat="pos in dcPos">
+            <td><b>{{pos.name}}</b></td>
+            <td ng-repeat="pos1 in dcPos">
+              {{rtt[pos.id][pos1.id]}}
+            </td>
+          </tr>
+        </table>
+      </center>
+    </div>
+
+    
+  </div>
+
+
+</body>
+</html>

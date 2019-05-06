@@ -76,28 +76,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <h2 class="heading">About Me</h2>
                         <div class="content">
                             <p>I am a research assistant and a PhD candidate at the Distributed Systems Lab 
-				(<a href="http://www.cs.ucsb.edu/~dsl">DSL</a>) at UCSB. I am interested 
-				 in distributed systems, data storage, data management, data privacy, cloud management, 
-				 and data mining research.
+				(<a href="http://www.cs.ucsb.edu/~dsl">DSL</a>) at UCSB. I am interested in blockchains, distributed systems, data privacy and security, and privacy of social
+				network users. My current research focuses on scaling and extending the functionality of permissionless
+				blockchains. I currently work on a protocol to support atomic cross-chain transaction. Also, I work
+				on adding transactional support to smart contracts. These protocols are steps towards building a
+				global asset management system on permissionless blockchain infrastructures. In addition, I work on
+				developing client-side caching protocols to resolve server-side load-imbalance in large scale distributed
+				caching systems. Finally, I work on solving the fault-tolerance problem of ORAM stores, in addition
+				to building client-centric tools to preserve the privacy of social network users.
 				</p>
-				<p>
-					<b>Data Management:</b> My work focuses on using data placement to enhance the performance
-					of distributed data management systems on multiple scales. One project, <b>GPlacer</b>, 
-					focuses on the placement of geo-replicated databases (databases that are replicated in multiple geographical regions
-				    to tolerate datacenter scale outages and enhance read latency) to enhance 
-					transaction latency without violating the application requirement. Another project, <b>HotCache</b>, 
-				    addresses the problem of load balancing in highly scalable distributed caches. This project
-				    aims to dynamically achieve load balacing between caching servers under highly scaled and
-				    skewed workloads without affecting the long tail lookup latency.
-                            </p>    
-				<p><b>Data Privacy:</b> I am also interested in building systems for data privacy. First, we developed <b>TaoStore</b>, the first tree-based ORAM
-					store that supports asynchronous and concurrent accesses. Then, we presented <b>Pharos</b> (<b>EDBT 2018 best demo award</b>),
-				a demo that highlights the privacy hazards of the naive usage of asymmetric locks and quorum in replicating ORAM stores. 
-				In addition, we build systems that help social network users to have more control over their privacy. Our vision is that
-				data noise must be added from the source to protect social network users from attribute (e.g., location, gender,
-					ethnicity, etc) inference attacks.  For this, we presented <b>LocBorg</b> (<b>SIGSPATIAL 2017 Second Place Best Vision Paper 
-				    Award</b>), a system that sits in the social network user's machine to help her defend her privacy. 
-			</p>
+				
 
                         </div><!--//content-->
                     </div><!--//section-inner-->                 
@@ -108,10 +96,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         <h2 class="heading">Papers</h2>
                         <div class="content">
                             <div class="item">
-			        <p class="summary">Sujaya Maiyya, <b>Victor Zakhary</b>, Divy Agrawal, Amr El Abbadi "Database and Distributed Computing Fundamentals 
+				    
+				<p class="summary"><b>Victor Zakhary</b>, Divy Agrawal, Amr El Abbadi "Atomic Commitment Across Blockchains" preprint
+					[<a href="assets/papers/arXiv__Atomic_Cross_Chain_Commitment.pdf" target=”_blank” onclick=”ga('send', {hitType: 'event',eventCategory: 'Document',eventAction: 'download',eventLabel: 'atomiccommitmentpdf'});”>pdf</a>]
+				</p>
+				    
+				<p class="summary"><b>Victor Zakhary</b>, Ishani Gupta, Rey Tang, Amr El Abbadi "Multifaceted Privacy: How to Express Your Online Persona without Revealing Your Sensitive Attributes" preprint
+					[<a href="assets/papers/arXiv__Multifaceted_privacy.pdf" target=”_blank” onclick=”ga('send', {hitType: 'event',eventCategory: 'Document',eventAction: 'download',eventLabel: 'ageispdf'});”>pdf</a>]		
+				</p>
+				<p class="summary">Sujaya Maiyya, <b>Victor Zakhary</b>, Divy Agrawal, Amr El Abbadi "Database and Distributed Computing Fundamentals 
 					for Scalable, Fault-tolerant, and Consistent Maintenance of Blockchains" VLDB 2018 (tutorial)
 					[<a href="assets/papers/Blockchain_tutorial_vldb18.pdf" target=”_blank” onclick=”ga('send', {hitType: 'event',eventCategory: 'Document',eventAction: 'download',eventLabel: 'vldb18tutorialpdf'});”>pdf</a>]
 					[<a href="assets/papers/Blockchain-tutorial-slides-vldb18.pdf"target=”_blank” onclick=”ga('send', {hitType: 'event',eventCategory: 'Document',eventAction: 'download',eventLabel: 'vldb18tutorialslides'});>slides</a>].
+				</p>
+			        <p class="summary">Sujaya Maiyya, <b>Victor Zakhary</b>, Divy Agrawal, Amr El Abbadi "Database and Distributed Computing Foundations of
+Blockchains" SIGMOD 2019 (tutorial)
+					[<a href="assets/papers/blockchain-tut05-SIGMOD2019.pdf" target=”_blank” onclick=”ga('send', {hitType: 'event',eventCategory: 'Document',eventAction: 'download',eventLabel: 'sigmod2019tutpdf'});”>pdf</a>]
 				</p>
 				<p class="summary"><b>Victor Zakhary</b>, Cetin Sahin, Amr El Abbadi, Huijia (Rachel) Lin, and Stefano Tessaro. "Pharos: Privacy Hazards of Replicating ORAM Stores" EDBT 2018 (<b> Best Demonstration Award</b>)
 					[<a href="assets/papers/pharos_edbt.pdf">pdf</a>].
